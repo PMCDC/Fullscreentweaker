@@ -1,0 +1,11 @@
+C:\Repos\Fullscreentweaker\FT.Core\bin\Debug\net5.0\FT.Core.deps.json
+C:\Repos\Fullscreentweaker\FT.Core\bin\Debug\net5.0\FT.Core.dll
+C:\Repos\Fullscreentweaker\FT.Core\bin\Debug\net5.0\ref\FT.Core.dll
+C:\Repos\Fullscreentweaker\FT.Core\bin\Debug\net5.0\FT.Core.pdb
+C:\Repos\Fullscreentweaker\FT.Core\obj\Debug\net5.0\FT.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Repos\Fullscreentweaker\FT.Core\obj\Debug\net5.0\FT.Core.AssemblyInfoInputs.cache
+C:\Repos\Fullscreentweaker\FT.Core\obj\Debug\net5.0\FT.Core.AssemblyInfo.cs
+C:\Repos\Fullscreentweaker\FT.Core\obj\Debug\net5.0\FT.Core.csproj.CoreCompileInputs.cache
+C:\Repos\Fullscreentweaker\FT.Core\obj\Debug\net5.0\FT.Core.dll
+C:\Repos\Fullscreentweaker\FT.Core\obj\Debug\net5.0\ref\FT.Core.dll
+C:\Repos\Fullscreentweaker\FT.Core\obj\Debug\net5.0\FT.Core.pdb

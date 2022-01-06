@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "j9SyvjWC4IVckeneUcCGzwSujrqIkc2b70Zb14pI7KYIjDNG0dVCSKM9vADlGmWrPNCdQ/c/DZCfb8KD+0pmpA==",
+  "success": true,
+  "projectFilePath": "C:\\Repos\\Fullscreentweaker\\FT.Core\\FT.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Richard\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\Richard\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
