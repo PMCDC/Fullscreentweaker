@@ -63,7 +63,7 @@ namespace FT.WinClient
                         iconReferences.Add(new WindowIconReference()
                         {
                             Icon = window.Icon,
-                            Index = i,
+                            Index = iconReferences.Count,
                             Pointer = window.Pointer
                         });
                     }
