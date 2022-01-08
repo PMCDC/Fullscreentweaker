@@ -174,6 +174,9 @@ namespace FT.WinClient
             }
         }
 
+        /// <summary>
+        /// Display about message
+        /// </summary>
         private void OpenAboutMessage()
         {
             StringBuilder stringBuilder = new StringBuilder();
