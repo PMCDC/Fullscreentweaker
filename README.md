@@ -8,7 +8,7 @@
 
 ### Technologies
 - C#
-- .NET CORE 5https://github.com/PMCDC/Fullscreentweaker
+- .NET CORE 5
 
 ## This looks familiar, doesn't it?
 
