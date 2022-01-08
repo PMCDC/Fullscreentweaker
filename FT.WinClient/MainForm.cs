@@ -39,6 +39,11 @@ namespace FT.WinClient
             Fullscreenzine();
         }
 
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenGithubLink();
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             RefreshActiveWindows();
@@ -134,6 +139,22 @@ namespace FT.WinClient
                     Window = window,
                     IsStayOnTop = true
                 });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Open the gitub of this solution
+        /// </summary>
+        private void OpenGithubLink()
+        {
+            try
+            {
+                var url = @"https://github.com/PMCDC/Fullscreentweaker";
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
             }
             catch (Exception ex)
             {
