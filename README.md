@@ -19,5 +19,6 @@ code was in **Pascal**, I decided to recode everything into something more moder
 
 I'm sharing the code here for anyone who know **C#** and want to tweak something or have fun with it.
 
+### Links of the original app made by **Kostas**
 - Original Fullscreenizer app: http://runtimeterror.com/tools/fullscreenizer/
 - Pascal source code: https://github.com/Zero3K/fullscreenizer
