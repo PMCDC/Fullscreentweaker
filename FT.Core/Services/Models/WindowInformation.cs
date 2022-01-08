@@ -13,6 +13,8 @@ namespace FT.Core.Services.Models
 
         public IntPtr Pointer { get; set; }
 
+        public int Index { get; set; }
+
         public Icon Icon { get; set; }
     }
 }

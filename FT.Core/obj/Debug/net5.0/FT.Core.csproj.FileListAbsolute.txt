@@ -9,3 +9,4 @@ C:\Repos\Fullscreentweaker\FT.Core\obj\Debug\net5.0\FT.Core.csproj.CoreCompileIn
 C:\Repos\Fullscreentweaker\FT.Core\obj\Debug\net5.0\FT.Core.dll
 C:\Repos\Fullscreentweaker\FT.Core\obj\Debug\net5.0\ref\FT.Core.dll
 C:\Repos\Fullscreentweaker\FT.Core\obj\Debug\net5.0\FT.Core.pdb
+C:\Repos\Fullscreentweaker\FT.Core\obj\Debug\net5.0\FT.Core.csproj.AssemblyReference.cache

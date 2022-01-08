@@ -34,6 +34,7 @@ namespace FT.WinClient
         static void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IProcessInteractorService, ProcessInteractorService>();
+            services.AddScoped<ICacheService, CacheService>();
             services.AddScoped<MainForm>();
         }
     }
