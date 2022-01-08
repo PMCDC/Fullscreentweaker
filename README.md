@@ -4,7 +4,7 @@
 
 > Some video games does not support Borderless Fullscreen and this tool can help rectify this.
 
-
+![Screenshot](https://github.com/PMCDC/Fullscreentweaker/blob/dd2fa5e43abba91ed9483c36e1388441a31a4acc/FT.Core/Images/FTScreenshot.png)
 
 ### Technologies
 - C#
