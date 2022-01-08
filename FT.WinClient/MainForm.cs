@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using FT.Core.Services;
 using FT.Core.Services.Models;
 using FT.Core.Extensions;
+using System.Threading;
 
 namespace FT.WinClient
 {
@@ -17,6 +18,7 @@ namespace FT.WinClient
     {
         private readonly IProcessInteractorService _processInteractorService;
         private readonly ICacheService _cacheService;
+        private Form _darkOverlayForm;
 
         public MainForm()
         {
@@ -43,7 +45,7 @@ namespace FT.WinClient
         {
             OpenGithubLink();
         }
-        
+
         private void MainForm_HelpButtonClicked(object sender, CancelEventArgs e)
         {
             OpenAboutMessage();
@@ -53,7 +55,7 @@ namespace FT.WinClient
         private void MainForm_Load(object sender, EventArgs e)
         {
             RefreshActiveWindows();
-        }        
+        }
 
         /// <summary>
         /// Refresh the current active process of the ListView
@@ -145,11 +147,40 @@ namespace FT.WinClient
                     MessageBox.Show("The process does no longer exist", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
+                this.ActiveControl = null;
+
+                //Apply a dark overlay for 4:3 game?
+                if (chk4x3.Checked)
+                {
+                    //instanciate the overlay form
+                    if (_darkOverlayForm == null || _darkOverlayForm.IsDisposed)
+                    {
+                        _darkOverlayForm = new DarkOverlayForm();
+                    }
+                    _darkOverlayForm.Show();
+
+                    //display the overlay
+                    _processInteractorService.SetBorderlessFullscreen(new Core.Services.Parameters.SetBorderlessFullscreenParameter()
+                    {
+                        Window = new WindowInformation()
+                        {
+                            Index = window.Index,
+                            Pointer = _darkOverlayForm.Handle,
+                            Title = "Dark Overlay"
+                        },
+                        IsStayOnTop = chkStayOnTop.Checked
+                    });
+
+                    //Add an exit handler in order to close the overlay at the same time of the game process
+                    AddOnExitHandler(window);
+                }
+
                 //apply borderless fullscreen
                 _processInteractorService.SetBorderlessFullscreen(new Core.Services.Parameters.SetBorderlessFullscreenParameter()
                 {
                     Window = window,
-                    IsStayOnTop = chkStayOnTop.Checked
+                    IsStayOnTop = chkStayOnTop.Checked,
+                    Is4x3 = chk4x3.Checked
                 });
             }
             catch (Exception ex)
@@ -187,12 +218,52 @@ namespace FT.WinClient
             stringBuilder.AppendLine(@"1. Open the game you want to force in ""Borderless Fullscreen"".");
             stringBuilder.AppendLine("2. Set the game into windowed mode.");
             stringBuilder.AppendLine("3. Hit refresh to make the game appear into the list.");
-            stringBuilder.AppendLine(@"4. Hit the Fullscreenize button to make the game ""Borderless Fullscreen""");
+            stringBuilder.AppendLine(@"4. Hit the Fullscreenize button to make the game ""Borderless Fullscreen"".");
+            stringBuilder.AppendLine("");
+            stringBuilder.AppendLine("Note:");
+            stringBuilder.AppendLine("Some games may require that you press Fullscreenize more than once in order to make it work.");
             stringBuilder.AppendLine("");
             stringBuilder.AppendLine("");
             stringBuilder.AppendLine(@"//Recoded by Pierre-Marc Coursol de Carufel");
 
             MessageBox.Show(stringBuilder.ToString(), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        /// <summary>
+        /// TODO: Add OnExit handler to close the dark overlay at the same time of the game
+        /// </summary>
+        /// <param name="window"></param>
+        private void AddOnExitHandler(WindowInformation window)
+        {
+            try
+            {
+                //var process = System.Diagnostics.Process.GetProcessById(window.ProcessId);
+                //process.EnableRaisingEvents = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Diagnostics.Debug.WriteLine($"error: {ex.Message}");
+            }
+
+        }
+
+        /// <summary>
+        /// Close the dark overlay
+        /// </summary>
+        public void CloseDarkOverlay()
+        {
+            try
+            {
+                if (_darkOverlayForm != null)
+                {
+                    _darkOverlayForm.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

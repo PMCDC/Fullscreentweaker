@@ -37,12 +37,14 @@ namespace FT.WinClient
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.lblCountInfo = new System.Windows.Forms.Label();
             this.lblTopLevelWindows = new System.Windows.Forms.Label();
+            this.lblSeparator = new System.Windows.Forms.Label();
+            this.chk4x3 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnRefresh
             // 
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRefresh.Location = new System.Drawing.Point(12, 348);
+            this.btnRefresh.Location = new System.Drawing.Point(12, 324);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(83, 23);
             this.btnRefresh.TabIndex = 0;
@@ -60,7 +62,7 @@ namespace FT.WinClient
             this.lvWindows.HideSelection = false;
             this.lvWindows.Location = new System.Drawing.Point(12, 30);
             this.lvWindows.Name = "lvWindows";
-            this.lvWindows.Size = new System.Drawing.Size(380, 312);
+            this.lvWindows.Size = new System.Drawing.Size(380, 288);
             this.lvWindows.TabIndex = 1;
             this.lvWindows.UseCompatibleStateImageBehavior = false;
             this.lvWindows.View = System.Windows.Forms.View.Details;
@@ -68,7 +70,7 @@ namespace FT.WinClient
             // btnFullscreenize
             // 
             this.btnFullscreenize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnFullscreenize.Location = new System.Drawing.Point(12, 377);
+            this.btnFullscreenize.Location = new System.Drawing.Point(13, 371);
             this.btnFullscreenize.Name = "btnFullscreenize";
             this.btnFullscreenize.Size = new System.Drawing.Size(83, 23);
             this.btnFullscreenize.TabIndex = 2;
@@ -82,7 +84,7 @@ namespace FT.WinClient
             this.chkStayOnTop.AutoSize = true;
             this.chkStayOnTop.Checked = true;
             this.chkStayOnTop.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkStayOnTop.Location = new System.Drawing.Point(101, 380);
+            this.chkStayOnTop.Location = new System.Drawing.Point(101, 364);
             this.chkStayOnTop.Name = "chkStayOnTop";
             this.chkStayOnTop.Size = new System.Drawing.Size(291, 19);
             this.chkStayOnTop.TabIndex = 3;
@@ -105,7 +107,7 @@ namespace FT.WinClient
             // 
             this.lblCountInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblCountInfo.AutoSize = true;
-            this.lblCountInfo.Location = new System.Drawing.Point(101, 352);
+            this.lblCountInfo.Location = new System.Drawing.Point(101, 328);
             this.lblCountInfo.Name = "lblCountInfo";
             this.lblCountInfo.Size = new System.Drawing.Size(166, 15);
             this.lblCountInfo.TabIndex = 5;
@@ -121,11 +123,35 @@ namespace FT.WinClient
             this.lblTopLevelWindows.TabIndex = 6;
             this.lblTopLevelWindows.Text = "Toplevel window(s):";
             // 
+            // lblSeparator
+            // 
+            this.lblSeparator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSeparator.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblSeparator.Location = new System.Drawing.Point(13, 351);
+            this.lblSeparator.Name = "lblSeparator";
+            this.lblSeparator.Size = new System.Drawing.Size(379, 2);
+            this.lblSeparator.TabIndex = 7;
+            this.lblSeparator.Text = "label1";
+            // 
+            // chk4x3
+            // 
+            this.chk4x3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chk4x3.AutoSize = true;
+            this.chk4x3.Location = new System.Drawing.Point(101, 383);
+            this.chk4x3.Name = "chk4x3";
+            this.chk4x3.Size = new System.Drawing.Size(75, 19);
+            this.chk4x3.TabIndex = 8;
+            this.chk4x3.Text = "4:3 Game";
+            this.chk4x3.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 411);
+            this.Controls.Add(this.chk4x3);
+            this.Controls.Add(this.lblSeparator);
             this.Controls.Add(this.lblTopLevelWindows);
             this.Controls.Add(this.lblCountInfo);
             this.Controls.Add(this.linkLabel1);
@@ -156,6 +182,8 @@ namespace FT.WinClient
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label lblCountInfo;
         private System.Windows.Forms.Label lblTopLevelWindows;
+        private System.Windows.Forms.Label lblSeparator;
+        private System.Windows.Forms.CheckBox chk4x3;
     }
 }
 
