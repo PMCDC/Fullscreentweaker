@@ -149,7 +149,7 @@ namespace FT.WinClient
                 _processInteractorService.SetBorderlessFullscreen(new Core.Services.Parameters.SetBorderlessFullscreenParameter()
                 {
                     Window = window,
-                    IsStayOnTop = true
+                    IsStayOnTop = chkStayOnTop.Checked
                 });
             }
             catch (Exception ex)
