@@ -35,12 +35,14 @@ namespace FT.WinClient
             this.btnFullscreenize = new System.Windows.Forms.Button();
             this.chkStayOnTop = new System.Windows.Forms.CheckBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.lblCountInfo = new System.Windows.Forms.Label();
+            this.lblTopLevelWindows = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnRefresh
             // 
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRefresh.Location = new System.Drawing.Point(12, 354);
+            this.btnRefresh.Location = new System.Drawing.Point(12, 348);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(83, 23);
             this.btnRefresh.TabIndex = 0;
@@ -58,7 +60,7 @@ namespace FT.WinClient
             this.lvWindows.HideSelection = false;
             this.lvWindows.Location = new System.Drawing.Point(12, 30);
             this.lvWindows.Name = "lvWindows";
-            this.lvWindows.Size = new System.Drawing.Size(380, 318);
+            this.lvWindows.Size = new System.Drawing.Size(380, 312);
             this.lvWindows.TabIndex = 1;
             this.lvWindows.UseCompatibleStateImageBehavior = false;
             this.lvWindows.View = System.Windows.Forms.View.Details;
@@ -66,7 +68,7 @@ namespace FT.WinClient
             // btnFullscreenize
             // 
             this.btnFullscreenize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnFullscreenize.Location = new System.Drawing.Point(12, 383);
+            this.btnFullscreenize.Location = new System.Drawing.Point(12, 377);
             this.btnFullscreenize.Name = "btnFullscreenize";
             this.btnFullscreenize.Size = new System.Drawing.Size(83, 23);
             this.btnFullscreenize.TabIndex = 2;
@@ -80,7 +82,7 @@ namespace FT.WinClient
             this.chkStayOnTop.AutoSize = true;
             this.chkStayOnTop.Checked = true;
             this.chkStayOnTop.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkStayOnTop.Location = new System.Drawing.Point(101, 386);
+            this.chkStayOnTop.Location = new System.Drawing.Point(101, 380);
             this.chkStayOnTop.Name = "chkStayOnTop";
             this.chkStayOnTop.Size = new System.Drawing.Size(291, 19);
             this.chkStayOnTop.TabIndex = 3;
@@ -99,20 +101,46 @@ namespace FT.WinClient
             this.linkLabel1.Text = "↪ github";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
+            // lblCountInfo
+            // 
+            this.lblCountInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblCountInfo.AutoSize = true;
+            this.lblCountInfo.Location = new System.Drawing.Point(101, 352);
+            this.lblCountInfo.Name = "lblCountInfo";
+            this.lblCountInfo.Size = new System.Drawing.Size(166, 15);
+            this.lblCountInfo.TabIndex = 5;
+            this.lblCountInfo.Text = "x Toplevel window(s) detected";
+            this.lblCountInfo.Visible = false;
+            // 
+            // lblTopLevelWindows
+            // 
+            this.lblTopLevelWindows.AutoSize = true;
+            this.lblTopLevelWindows.Location = new System.Drawing.Point(13, 8);
+            this.lblTopLevelWindows.Name = "lblTopLevelWindows";
+            this.lblTopLevelWindows.Size = new System.Drawing.Size(111, 15);
+            this.lblTopLevelWindows.TabIndex = 6;
+            this.lblTopLevelWindows.Text = "Toplevel window(s):";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 411);
+            this.Controls.Add(this.lblTopLevelWindows);
+            this.Controls.Add(this.lblCountInfo);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.chkStayOnTop);
             this.Controls.Add(this.btnFullscreenize);
             this.Controls.Add(this.lvWindows);
             this.Controls.Add(this.btnRefresh);
+            this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(420, 450);
             this.Name = "MainForm";
             this.Text = "Fullscreen Tweaker";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.MainForm_HelpButtonClicked);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -126,6 +154,8 @@ namespace FT.WinClient
         private System.Windows.Forms.Button btnFullscreenize;
         private System.Windows.Forms.CheckBox chkStayOnTop;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label lblCountInfo;
+        private System.Windows.Forms.Label lblTopLevelWindows;
     }
 }
 

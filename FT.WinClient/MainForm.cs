@@ -43,6 +43,12 @@ namespace FT.WinClient
         {
             OpenGithubLink();
         }
+        
+        private void MainForm_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            OpenAboutMessage();
+            e.Cancel = true; //to be sure the cursor does not change
+        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -59,6 +65,8 @@ namespace FT.WinClient
                 var windows = _processInteractorService.GetActiveWindows();
                 _cacheService.SetCachedWindowInformations(windows);
 
+
+                //clear the list
                 lvWindows.Clear();
                 lvWindows.AddBlankColumnHeader();
 
@@ -104,6 +112,10 @@ namespace FT.WinClient
 
                 //Resize columns
                 lvWindows.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+                //refresh count
+                lblCountInfo.Visible = true;
+                lblCountInfo.Text = $"{windows.Count} Toplevel window(s) detected";
             }
             catch (Exception ex)
             {
@@ -160,6 +172,24 @@ namespace FT.WinClient
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void OpenAboutMessage()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine(@"C#/.NET5 version of the Fullscreenizer app originaly made by Kostas ""Bad Sector"" Michalopoulos");
+            stringBuilder.AppendLine("");
+            stringBuilder.AppendLine("Instructions:");
+            stringBuilder.AppendLine(@"1. Open the game you want to force in ""Borderless Fullscreen"".");
+            stringBuilder.AppendLine("2. Set the game into windowed mode.");
+            stringBuilder.AppendLine("3. Hit refresh to make the game appear into the list.");
+            stringBuilder.AppendLine(@"4. Hit the Fullscreenize button to make the game ""Borderless Fullscreen""");
+            stringBuilder.AppendLine("");
+            stringBuilder.AppendLine("");
+            stringBuilder.AppendLine(@"//Recoded by Pierre-Marc Coursol de Carufel");
+
+            MessageBox.Show(stringBuilder.ToString(), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
