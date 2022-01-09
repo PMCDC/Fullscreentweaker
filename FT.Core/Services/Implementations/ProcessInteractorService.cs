@@ -190,9 +190,9 @@ namespace FT.Core.Services
                 height: Screen.PrimaryScreen.Bounds.Height
             );
 
-            if (parameter.Is4x3)
+            if (parameter.Is4x3 && parameter.DimensionSettingsFor4x3AspectRatio != null)
             {
-                var convertedRatio = Get4x3AspectRatioOfScreen(Screen.PrimaryScreen);
+                var convertedRatio = Get4x3AspectRatioOfScreen(Screen.PrimaryScreen, parameter.DimensionSettingsFor4x3AspectRatio);
                 rect.X = convertedRatio.OffsetOfX;
                 rect.Width = convertedRatio.Width;
             }
@@ -217,7 +217,8 @@ namespace FT.Core.Services
             //fit window into primary monitor position
             MoveWindow(parameter.Window.Pointer, (int)rect.Left, (int)rect.Top, (int)rect.Right - (int)rect.Left, (int)rect.Bottom - (int)rect.Top, true);
 
-            //focus back on window (note: required if the dark overlay is used in order for the game to be on top of it)
+            //focus back on window (note: required to do "SetForegroundWindow" if the dark overlay is used in order for the game to be on top of it)
+            ShowWindow(parameter.Window.Pointer, ShowWindowParameter.SW_SHOW);
             SetForegroundWindow(parameter.Window.Pointer);
         }
 
@@ -293,19 +294,20 @@ namespace FT.Core.Services
         }
 
         /// <summary>
-        /// Get aspect 4:3 ratio of an 16:9 monitor
-        /// todo: Add support for every type of monitor
+        /// Get 4:3 aspect ratio based on the monitor or via a forced setting
         /// </summary>
         /// <param name="screen"></param>
+        /// <param name="settings"></param>
         /// <returns></returns>
-        private AspectRatioModel Get4x3AspectRatioOfScreen(Screen screen)
+        private AspectRatioModel Get4x3AspectRatioOfScreen(Screen screen, DimensionsSettingsModel settings)
         {
             var result = new AspectRatioModel();
 
             result.WidthRatio = 4;
             result.HeightRatio = 3;
-            result.Width = 1440;
-            result.Height = 1080;
+
+            result.Width = settings.AutoCalculate ? (screen.Bounds.Height / 3) * 4 : settings.ForcedWidth;
+            result.Height = screen.Bounds.Height;
             result.OffsetOfX = (screen.Bounds.Width - result.Width) / 2;
 
             return result;

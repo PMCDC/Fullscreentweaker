@@ -55,6 +55,21 @@ namespace FT.WinClient
         private void MainForm_Load(object sender, EventArgs e)
         {
             RefreshActiveWindows();
+            ManageControlsOf4x3GroupBox();
+        }
+        
+        private void chk4x3_CheckedChanged(object sender, EventArgs e)
+        {
+            ManageControlsOf4x3GroupBox();
+        }
+        private void rbAuto_CheckedChanged(object sender, EventArgs e)
+        {
+            ManageControlsOf4x3GroupBox();
+        }
+
+        private void rbForce_CheckedChanged(object sender, EventArgs e)
+        {
+            ManageControlsOf4x3GroupBox();
         }
 
         /// <summary>
@@ -67,11 +82,9 @@ namespace FT.WinClient
                 var windows = _processInteractorService.GetActiveWindows();
                 _cacheService.SetCachedWindowInformations(windows);
 
-
                 //clear the list
                 lvWindows.Clear();
                 lvWindows.AddBlankColumnHeader();
-
 
                 ImageList imageList = new ImageList();
                 List<WindowIconReference> iconReferences = new List<WindowIconReference>();
@@ -147,6 +160,7 @@ namespace FT.WinClient
                     MessageBox.Show("The process does no longer exist", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
+                //validation was a succes? Set activeControl to null to remove focus
                 this.ActiveControl = null;
 
                 //Apply a dark overlay for 4:3 game?
@@ -180,7 +194,12 @@ namespace FT.WinClient
                 {
                     Window = window,
                     IsStayOnTop = chkStayOnTop.Checked,
-                    Is4x3 = chk4x3.Checked
+                    Is4x3 = chk4x3.Checked,
+                    DimensionSettingsFor4x3AspectRatio = new DimensionsSettingsModel()
+                    {
+                        AutoCalculate = rbAuto.Checked,
+                        ForcedWidth = (int)nudWidth.Value
+                    }
                 });
             }
             catch (Exception ex)
@@ -265,5 +284,19 @@ namespace FT.WinClient
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        /// <summary>
+        /// Alter the Enable/Disable of the controls of the 4:3 groupbox settings
+        /// </summary>
+        private void ManageControlsOf4x3GroupBox()
+        {
+            var enabled = chk4x3.Checked;
+
+            rbAuto.Enabled = enabled;
+            rbForce.Enabled = enabled;
+            nudWidth.Enabled = enabled && rbForce.Checked;
+        }
+
+
     }
 }
