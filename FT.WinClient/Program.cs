@@ -35,6 +35,7 @@ namespace FT.WinClient
         {
             services.AddScoped<IProcessInteractorService, ProcessInteractorService>();
             services.AddScoped<ICacheService, CacheService>();
+            services.AddScoped<IWorkerService, WorkerService>();
             services.AddScoped<MainForm>();
         }
     }

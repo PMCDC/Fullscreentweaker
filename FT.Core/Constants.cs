@@ -8,6 +8,19 @@ namespace FT.Core
 {
     public static partial class Constants
     {
+        public static class FullscreenTweaker 
+        {
+            public const string VERSION = "1.1.0";
+        }
+
+        public static class Worker 
+        {
+            /// <summary>
+            /// Default interval between callbacks. Default 2 seconds (2000mm)
+            /// </summary>
+            public const int DEFAULT_INTERVAL = 2000;
+        }
+
         public static class WindowStyle
         {
             /// <summary>

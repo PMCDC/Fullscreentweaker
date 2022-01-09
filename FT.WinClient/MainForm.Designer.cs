@@ -29,6 +29,7 @@ namespace FT.WinClient
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btnRefresh = new System.Windows.Forms.Button();
             this.lvWindows = new System.Windows.Forms.ListView();
@@ -43,6 +44,7 @@ namespace FT.WinClient
             this.nudWidth = new System.Windows.Forms.NumericUpDown();
             this.rbForce = new System.Windows.Forms.RadioButton();
             this.rbAuto = new System.Windows.Forms.RadioButton();
+            this.tpMainForm = new System.Windows.Forms.ToolTip(this.components);
             this.gb4x3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).BeginInit();
             this.SuspendLayout();
@@ -203,6 +205,10 @@ namespace FT.WinClient
             this.rbAuto.UseVisualStyleBackColor = true;
             this.rbAuto.CheckedChanged += new System.EventHandler(this.rbAuto_CheckedChanged);
             // 
+            // tpMainForm
+            // 
+            this.tpMainForm.AutomaticDelay = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -249,6 +255,7 @@ namespace FT.WinClient
         private System.Windows.Forms.NumericUpDown nudWidth;
         private System.Windows.Forms.RadioButton rbForce;
         private System.Windows.Forms.RadioButton rbAuto;
+        private System.Windows.Forms.ToolTip tpMainForm;
     }
 }
 
