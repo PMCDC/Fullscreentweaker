@@ -79,7 +79,7 @@ namespace FT.Core.Services
         /// <param name="lParam"></param>
         /// <returns></returns>
         [DllImport("user32.dll")]
-        private static extern int SendMessage(IntPtr hwnd, int message, int wParam, IntPtr lParam);
+        private static extern int SendMessage(IntPtr hwnd, uint message, uint wParam, IntPtr lParam);
 
         /// <summary>
         /// Retrieves the name of the class to which the specified window belongs.
@@ -144,6 +144,34 @@ namespace FT.Core.Services
         [DllImport("User32.dll")]
         static extern bool MoveWindow(IntPtr handle, int x, int y, int width, int height, bool redraw);
 
+        /// <summary>
+        /// Sets the specified window's show state.
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <param name="nCmdShow"></param>
+        /// <returns></returns>
+        [DllImport("User32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        /// <summary>
+        /// Brings the thread that created the specified window into the foreground and activates the window. 
+        /// Keyboard input is directed to the window, and various visual cues are changed for the user. 
+        /// The system assigns a slightly higher priority to the thread that created the foreground window than it does to other threads.
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <returns></returns>
+        [DllImport("User32.dll")]
+        static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        /// <summary>
+        /// Retrieves the identifier of the thread that created the specified window and, optionally, the identifier of the process that created the window.
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <param name="processId"></param>
+        /// <returns></returns>
+        [DllImport("user32")]
+        static extern int GetWindowThreadProcessId(IntPtr hWnd, out int processId);
+
         #endregion
 
         public List<WindowInformation> GetActiveWindows()
@@ -162,13 +190,25 @@ namespace FT.Core.Services
                 height: Screen.PrimaryScreen.Bounds.Height
             );
 
+            if (parameter.Is4x3 && parameter.DimensionSettingsFor4x3AspectRatio != null)
+            {
+                var convertedRatio = Get4x3AspectRatioOfScreen(Screen.PrimaryScreen, parameter.DimensionSettingsFor4x3AspectRatio);
+                rect.X = convertedRatio.OffsetOfX;
+                rect.Width = convertedRatio.Width;
+            }
+
             //set new style of window
             SetWindowLong(parameter.Window.Pointer, (int)WindowLongFlag.GWL_STYLE, (uint)(WindowStyle.WS_POPUP | WindowStyle.WS_VISIBLE));
+
+            //set new extended style of window (completly remove borders)
+            var currentExtendedStyle = GetWindowLong(parameter.Window.Pointer, (int)WindowLongFlag.GWL_EXSTYLE);
+            SetWindowLong(parameter.Window.Pointer, (int)WindowLongFlag.GWL_EXSTYLE, currentExtendedStyle
+                &= ~((uint)WindowExtendedStyle.WS_EX_DLGMODALFRAME | (uint)WindowExtendedStyle.WS_EX_CLIENTEDGE | (uint)WindowExtendedStyle.WS_EX_STATICEDGE));
 
             //Adjust window for the new style
             AdjustWindowRect(rect, GetWindowLong(parameter.Window.Pointer, (int)WindowLongFlag.GWL_STYLE), false);
 
-            //set window as topmost
+            //add topmost to the extended style
             if (parameter.IsStayOnTop)
             {
                 SetWindowLong(parameter.Window.Pointer, (int)WindowLongFlag.GWL_EXSTYLE, (uint)(GetWindowLong(parameter.Window.Pointer, (int)WindowLongFlag.GWL_EXSTYLE) | WindowExtendedStyle.WS_EX_TOPMOST));
@@ -176,6 +216,10 @@ namespace FT.Core.Services
 
             //fit window into primary monitor position
             MoveWindow(parameter.Window.Pointer, (int)rect.Left, (int)rect.Top, (int)rect.Right - (int)rect.Left, (int)rect.Bottom - (int)rect.Top, true);
+
+            //focus back on window (note: required to do "SetForegroundWindow" if the dark overlay is used in order for the game to be on top of it)
+            ShowWindow(parameter.Window.Pointer, ShowWindowParameter.SW_SHOW);
+            SetForegroundWindow(parameter.Window.Pointer);
         }
 
         /// <summary>
@@ -210,10 +254,14 @@ namespace FT.Core.Services
 
                         var icon = hicon != IntPtr.Zero ? Icon.FromHandle(hicon) : (Icon)null;
 
+                        //retreive process id
+                        GetWindowThreadProcessId(hWnd, out var processId);
+
                         windows.Add(new WindowInformation()
                         {
                             Title = GetWindowText(hWnd),
                             Icon = icon,
+                            ProcessId = processId,
                             Pointer = hWnd,
                             Index = windows.Count
                         });
@@ -243,6 +291,26 @@ namespace FT.Core.Services
             }
 
             return String.Empty;
+        }
+
+        /// <summary>
+        /// Get 4:3 aspect ratio based on the monitor or via a forced setting
+        /// </summary>
+        /// <param name="screen"></param>
+        /// <param name="settings"></param>
+        /// <returns></returns>
+        private AspectRatioModel Get4x3AspectRatioOfScreen(Screen screen, DimensionsSettingsModel settings)
+        {
+            var result = new AspectRatioModel();
+
+            result.WidthRatio = 4;
+            result.HeightRatio = 3;
+
+            result.Width = settings.AutoCalculate ? (screen.Bounds.Height / 3) * 4 : settings.ForcedWidth;
+            result.Height = screen.Bounds.Height;
+            result.OffsetOfX = (screen.Bounds.Width - result.Width) / 2;
+
+            return result;
         }
     }
 }

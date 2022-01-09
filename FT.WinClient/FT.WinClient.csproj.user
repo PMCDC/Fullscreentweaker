@@ -4,6 +4,9 @@
     <_LastSelectedProfileId>C:\Repos\Fullscreentweaker\FT.WinClient\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="DarkOverlayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

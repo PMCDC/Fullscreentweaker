@@ -9,8 +9,12 @@ namespace FT.Core.Services
 {
     public interface ICacheService
     {
+        List<FullscreenizedGameModel> FullscreenizedGameModels { get; }
+
         List<WindowInformation> WindowInformations { get; }
 
         void SetCachedWindowInformations(List<WindowInformation> windowInformations);
+
+        void AddOrUpdateFullscreenizedGame(FullscreenizedGameModel model);
     }
 }

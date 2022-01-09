@@ -12,5 +12,9 @@ namespace FT.Core.Services.Parameters
         public WindowInformation Window { get; set; }
 
         public bool IsStayOnTop { get; set; }
+
+        public bool Is4x3 { get; set; }
+
+        public DimensionsSettingsModel DimensionSettingsFor4x3AspectRatio { get; set; }
     }
 }
