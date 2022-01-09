@@ -1,6 +1,6 @@
 # Fullscreen Tweaker
 
-**Fullscreen Tweaker** allow you to adjust game's window into "Borderless Fullscreen". You find you game that is currently running in the list, you click "Fullscreenize" and thats it!
+**Fullscreen Tweaker** allow you to adjust game's window into "Borderless Fullscreen". Find the game that is currently running in the list, click "Fullscreenize" and thats it!
 
 > Some video games does not support Borderless Fullscreen and this tool can help rectify this.
 
