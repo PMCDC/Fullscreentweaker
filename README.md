@@ -4,7 +4,15 @@
 
 > Some video games does not support Borderless Fullscreen and this tool can help rectify this.
 
-![Screenshot](https://github.com/PMCDC/Fullscreentweaker/blob/dd2fa5e43abba91ed9483c36e1388441a31a4acc/FT.Core/Images/FTScreenshot.png)
+![Screenshot](https://github.com/PMCDC/Fullscreentweaker/blob/4c5729c4300bcccae6764e6196693c15db3269ec/FT.Core/Images/FTScreenshot2.png)
+
+**Before you run the tool:**
+> It is better that you set the game's resolution as the same of the monitor. That way, the visual of the game will remain clean.
+
+**About 4:3 games:**
+> The 4:3 option will adjust the game window and make it appear at the center of the monitor. It is better that you create an custom 4:3 resolution for your display and then set this resolution into the game's display option before you run the tool. 
+>
+> Example, for an 1080p monitor, instead of running the game in 1920x1080, you should set the game resolution to 1440x1080.
 
 ### Technologies
 - C#
