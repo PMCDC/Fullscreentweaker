@@ -240,18 +240,21 @@ namespace FT.Core.Services
                     if (!string.IsNullOrEmpty(title))
                     {
                         //retreive app icon
-                        var hicon = (IntPtr)SendMessage(hWnd, WindowMessage.WM_GETICON, GetIconParameter.ICON_SMALL, IntPtr.Zero);
+                        var hicon = (IntPtr)SendMessage(hWnd, WindowMessage.WM_GETICON, GetIconParameter.ICON_BIG, IntPtr.Zero);
 
-                        if (hicon == IntPtr.Zero)
-                        {
-                            hicon = (IntPtr)GetClassLongPtr(hWnd, GetClassLongParameter.GCL_HICONSM);
-                        }
-
+                        //if big icon not found, try the other format
                         if (hicon == IntPtr.Zero)
                         {
                             hicon = (IntPtr)GetClassLongPtr(hWnd, GetClassLongParameter.GCL_HICON);
                         }
 
+                        //if still not found, try to get the small one
+                        if (hicon == IntPtr.Zero)
+                        {
+                            hicon = (IntPtr)GetClassLongPtr(hWnd, GetClassLongParameter.GCL_HICONSM);
+                        }
+
+                        //still not found, well null!
                         var icon = hicon != IntPtr.Zero ? Icon.FromHandle(hicon) : (Icon)null;
 
                         //retreive process id
