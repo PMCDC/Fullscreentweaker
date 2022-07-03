@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FT.Client.Views.Common"
+             xmlns:behaviors="clr-namespace:FT.Client.Behaviors"
+             xmlns:converter="clr-namespace:FT.Client.Views.Converters"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-             Background="#070707"
+             Background="{Binding UserControlBackground}"
              TextElement.FontWeight="Medium"
              TextElement.FontSize="14"
              FontFamily="{materialDesign:MaterialDesignFont}"
@@ -17,13 +18,18 @@
              Cursor="Hand"
              MinHeight="50"
              MaxHeight="50"
-             MouseEnter="UserControl_MouseEnter"
-             MouseLeave="UserControl_MouseLeave">
-    
+             behaviors:MouseBehaviour.MouseUpCommand="{Binding OnGameSelectedCommand}"
+             behaviors:MouseBehaviour.MouseEnterCommand="{Binding OnMouseEnterCommand}"
+             behaviors:MouseBehaviour.MouseLeaveCommand="{Binding OnMouseLeaveCommand}">
+
+    <UserControl.Resources>
+        <converter:IsSelectedForegroundConverter x:Key="IsSelectedForegroundConverter"/>
+    </UserControl.Resources>
+
     <DockPanel LastChildFill="False">
         <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-            <Image Margin="10,0,0,0" Source="{Binding Path=IconImage, Mode=OneTime}" VerticalAlignment="Center" />
-            <TextBlock Margin="10,0,0,0" FontSize="16" VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
+            <Image Margin="10,0,0,0" Width="48" MinWidth="48" MaxWidth="48" Height="48" MinHeight="48" MaxHeight="48" Source="{Binding Path=IconImage, Mode=OneTime}" />
+            <TextBlock Margin="10,0,0,0" FontSize="16" VerticalAlignment="Center" Foreground="{Binding IsSelected, Converter={StaticResource IsSelectedForegroundConverter}}" Text="{Binding WindowInformation.Title}"></TextBlock>
         </StackPanel>
     </DockPanel>
 </UserControl>

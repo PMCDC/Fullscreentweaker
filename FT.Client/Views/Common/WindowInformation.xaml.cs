@@ -24,15 +24,5 @@ namespace FT.Client.Views.Common
         {
             InitializeComponent();
         }
-
-        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
-        {
-            Background = (Brush)new BrushConverter().ConvertFromString("#141414");
-        }
-
-        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Background = (Brush)new BrushConverter().ConvertFromString("#070707");
-        }
     }
 }
