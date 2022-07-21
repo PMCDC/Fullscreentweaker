@@ -197,11 +197,24 @@ namespace FT.Core.Services
                 rect.Width = convertedRatio.Width;
             }
 
+
             //set new style of window
-            SetWindowLong(parameter.Window.Pointer, (int)WindowLongFlag.GWL_STYLE, (uint)(WindowStyle.WS_POPUP | WindowStyle.WS_VISIBLE));
+            var newWindowStyle = (uint)(WindowStyle.WS_POPUP | WindowStyle.WS_VISIBLE);
+            if (parameter.RemoveTitleBar)
+            {
+                //remove title bar (ref: https://stackoverflow.com/questions/2825528/removing-the-title-bar-of-external-application-using-c-sharp)
+                newWindowStyle = newWindowStyle &= ~(uint)WindowStyle.WS_CAPTION;
+                newWindowStyle = newWindowStyle &= ~(uint)WindowStyle.WS_SYSMENU;
+                newWindowStyle = newWindowStyle &= ~(uint)WindowStyle.WS_THICKFRAME;
+                newWindowStyle = newWindowStyle &= ~(uint)WindowStyle.WS_MINIMIZE;
+                newWindowStyle = newWindowStyle &= ~(uint)WindowStyle.WS_MAXIMIZEBOX;
+            }
+            SetWindowLong(parameter.Window.Pointer, (int)WindowLongFlag.GWL_STYLE, newWindowStyle);
+
+            //retreive current extended style
+            var currentExtendedStyle = GetWindowLong(parameter.Window.Pointer, (int)WindowLongFlag.GWL_EXSTYLE);
 
             //set new extended style of window (completly remove borders)
-            var currentExtendedStyle = GetWindowLong(parameter.Window.Pointer, (int)WindowLongFlag.GWL_EXSTYLE);
             SetWindowLong(parameter.Window.Pointer, (int)WindowLongFlag.GWL_EXSTYLE, currentExtendedStyle
                 &= ~((uint)WindowExtendedStyle.WS_EX_DLGMODALFRAME | (uint)WindowExtendedStyle.WS_EX_CLIENTEDGE | (uint)WindowExtendedStyle.WS_EX_STATICEDGE));
 
@@ -302,9 +315,11 @@ namespace FT.Core.Services
         /// <param name="screen"></param>
         /// <param name="settings"></param>
         /// <returns></returns>
-        private AspectRatioModel Get4x3AspectRatioOfScreen(Screen screen, DimensionsSettingsModel settings)
+        public AspectRatioModel Get4x3AspectRatioOfScreen(Screen screen, DimensionsSettingsModel settings)
         {
             var result = new AspectRatioModel();
+            result.ActualMonitorWidth = screen.Bounds.Width;
+            result.ActualMonitorHeight = screen.Bounds.Height;
 
             result.WidthRatio = 4;
             result.HeightRatio = 3;

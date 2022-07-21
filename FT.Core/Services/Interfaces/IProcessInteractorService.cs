@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FT.Core.Services
 {
@@ -13,5 +14,7 @@ namespace FT.Core.Services
         List<WindowInformation> GetActiveWindows();
 
         void SetBorderlessFullscreen(SetBorderlessFullscreenParameter parameter);
+
+        AspectRatioModel Get4x3AspectRatioOfScreen(Screen screen, DimensionsSettingsModel settings);
     }
 }

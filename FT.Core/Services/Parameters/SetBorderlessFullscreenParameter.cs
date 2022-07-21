@@ -15,6 +15,8 @@ namespace FT.Core.Services.Parameters
 
         public bool Is4x3 { get; set; }
 
+        public bool RemoveTitleBar { get; set; }
+
         public DimensionsSettingsModel DimensionSettingsFor4x3AspectRatio { get; set; }
     }
 }

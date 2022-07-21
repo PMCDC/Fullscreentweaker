@@ -44,9 +44,24 @@ namespace FT.Core
             public const long WS_CAPTION = 0x00C00000L;
 
             /// <summary>
+            /// The window has a window menu on its title bar. The WS_CAPTION style must also be specified.
+            /// </summary>
+            public const long WS_SYSMENU = 0x00080000L;
+
+            /// <summary>
+            /// The window has a sizing border. Same as the WS_SIZEBOX style.
+            /// </summary>
+            public const long WS_THICKFRAME = 0x00040000L;
+
+            /// <summary>
             /// The window has a thin-line border.
             /// </summary>
             public const long WS_BORDER = 0x00800000L;
+
+            /// <summary>
+            /// The window is initially minimized. Same as the WS_ICONIC style.
+            /// </summary>
+            public const long WS_MINIMIZE = 0x20000000L;
 
             /// <summary>
             /// The window has a maximize button. Cannot be combined with the WS_EX_CONTEXTHELP style. The WS_SYSMENU style must also be specified.
