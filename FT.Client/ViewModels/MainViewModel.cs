@@ -12,6 +12,11 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Interop;
+using System.ComponentModel;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Windows.Threading;
+using System.Threading.Tasks;
 
 namespace FT.Client.ViewModels
 {
@@ -20,6 +25,7 @@ namespace FT.Client.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly IProcessInteractorService _processInteractorService;
         private readonly ICacheService _cacheService;
+        private readonly BackgroundWorker _backgroundWorker;
 
         private bool _is4By3Game;
         private bool _isAutoWidth = true;
@@ -97,6 +103,55 @@ namespace FT.Client.ViewModels
             RaisePropertyChanged(nameof(ForcedWidthValue));
             
             RefreshWindowInformations();
+
+            _backgroundWorker = new BackgroundWorker()
+            {
+                WorkerSupportsCancellation = false,
+                WorkerReportsProgress = false
+            };
+
+            _backgroundWorker.DoWork += _backgroundWorker_DoWork;
+            _backgroundWorker.RunWorkerAsync();
+        }
+
+        private async void _backgroundWorker_DoWork(object? sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                try
+                {
+                    var fullscreenizedGamesToRemove = new List<FullscreenizedGameModel>();
+                    var availableProcess = _processInteractorService.GetActiveWindows();
+
+                    //get terminated process/game
+                    foreach (var cached in _cacheService.FullscreenizedGameModels)
+                    {
+                        if (!availableProcess.Any(w => w.Pointer == cached.Game.Pointer))
+                        {
+                            fullscreenizedGamesToRemove.Add(cached);
+                        }
+                    }
+
+                    //remove game from cache (and close dark overlay as well)
+                    foreach (var fullscreenizedGame in fullscreenizedGamesToRemove)
+                    {
+                        //be sure darkoverlay still exist
+                        if (fullscreenizedGame.DarkOverlay != null && availableProcess.Any(w => w.Pointer == fullscreenizedGame.DarkOverlay.Pointer))
+                        {
+                            System.Windows.Application.Current.Dispatcher.Invoke(() => 
+                            {
+                                var darkOverlay = (Views.Common.DarkOverlay)(HwndSource.FromHwnd(fullscreenizedGame.DarkOverlay.Pointer).RootVisual);
+                                darkOverlay.Close();
+                            });
+                        }
+                        _cacheService.FullscreenizedGameModels.Remove(fullscreenizedGame);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"VerifyProcess error: {ex.Message}");
+                }
+            }
         }
 
         public void RefreshWindowInformations()
