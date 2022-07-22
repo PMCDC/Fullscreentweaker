@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Resources\Images\" />
     <Folder Include="Services\Results\" />
   </ItemGroup>
 
