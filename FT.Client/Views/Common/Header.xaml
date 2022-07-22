@@ -20,6 +20,14 @@
             <TextBlock Margin="10,0,0,0" FontSize="24" VerticalAlignment="Center" Text="Fullscreen Tweaker"></TextBlock>
         </StackPanel>
         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+            <Button x:Name="GithubButton" Margin="0,0,10,0" Cursor="Hand" Background="#5b5bff" BorderBrush="#5b5bff" Click="GithubButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Width="24" Height="24" Kind="Github" />
+                    <TextBlock VerticalAlignment="Center" Text="Go to Github"/>
+                    <materialDesign:PackIcon Width="24" Height="24" Kind="ExternalLink" />
+                </StackPanel>
+                
+            </Button>
             <Button x:Name="AboutButton" Margin="0,0,10,0" Cursor="Hand" Background="#5b5bff" BorderBrush="#5b5bff" Click="AboutButton_Click">
                 <materialDesign:PackIcon Width="24" Height="24" Kind="InfoCircle" />
             </Button>

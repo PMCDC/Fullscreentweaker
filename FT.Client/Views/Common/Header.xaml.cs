@@ -1,7 +1,8 @@
 ﻿using MaterialDesignThemes.Wpf;
+using System;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -77,6 +78,19 @@ namespace FT.Client.Views.Common
             stringBuilder.AppendLine(@"//Coded by Pierre-Marc Coursol de Carufel");
 
             System.Windows.Forms.MessageBox.Show(stringBuilder.ToString(), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void GithubButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var url = @"https://github.com/PMCDC/Fullscreentweaker";
+                Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
