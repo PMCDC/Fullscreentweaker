@@ -20,6 +20,9 @@
             <TextBlock Margin="10,0,0,0" FontSize="24" VerticalAlignment="Center" Text="Fullscreen Tweaker"></TextBlock>
         </StackPanel>
         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+            <Button x:Name="AboutButton" Margin="0,0,10,0" Cursor="Hand" Background="#5b5bff" BorderBrush="#5b5bff" Click="AboutButton_Click">
+                <materialDesign:PackIcon Width="24" Height="24" Kind="InfoCircle" />
+            </Button>
             <Button Name="MinimizeButton" Click="MinimizeButton_Click" Margin="0,0,10,0" Cursor="Hand">
                 <materialDesign:PackIcon Kind="WindowMinimize"></materialDesign:PackIcon>
             </Button>

@@ -17,7 +17,8 @@
         Title="Fullscreen Tweaker" 
         Height="500" 
         Width="1000"
-        WindowStyle="None">
+        WindowStyle="None"
+        Icon="pack://application:,,,/FT.Core;component/Resources/Icons/fticon.ico">
 
     <!--Allow CanResize and having very tiny borders event at the top of the WindowForm-->
     <WindowChrome.WindowChrome>
@@ -111,7 +112,8 @@
                             </CheckBox.LayoutTransform>
                             <TextBlock Foreground="White" Text="Apply 'stay on top' flag to avoid taskbar flickering"></TextBlock>
                         </CheckBox>
-                        <CheckBox Cursor="Hand" IsChecked="{Binding RemoveTitleBar}" Margin="0,10,0,10">
+                        <!--Seems to be useless. Splinter Cell is always displaying the title bar no matter what...-->
+                        <CheckBox Cursor="Hand" IsChecked="{Binding RemoveTitleBar}" Margin="0,10,0,10" Visibility="Collapsed">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="1.2" ScaleY="1.2" />
                             </CheckBox.LayoutTransform>

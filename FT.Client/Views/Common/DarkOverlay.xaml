@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:FT.Client.Views.Common"
         mc:Ignorable="d"
         Title="DarkOverlay" Height="450" Width="800"
-        WindowStyle="None" Background="Black">
+        WindowStyle="None" Background="Black"
+        Icon="pack://application:,,,/FT.Core;component/Resources/Icons/fticon.ico">
     <Grid>
         
     </Grid>
