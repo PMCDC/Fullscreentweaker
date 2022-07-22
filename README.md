@@ -4,7 +4,7 @@
 
 > Some video games does not support Borderless Fullscreen and this tool can help rectify this.
 
-![Screenshot](https://github.com/PMCDC/Fullscreentweaker/blob/4c5729c4300bcccae6764e6196693c15db3269ec/FT.Core/Images/FTScreenshot2.png)
+![Screenshot](https://github.com/PMCDC/Fullscreentweaker/blob/main/FT.Core/Resources/Images/Readme_IMG_001.png)
 
 **Before you run the tool:**
 > It is better that you set the game's resolution as the same of the monitor. That way, the visual of the game will remain clean.
