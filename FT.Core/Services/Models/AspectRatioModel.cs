@@ -17,5 +17,8 @@ namespace FT.Core.Services.Models
         public int Height { get; set; }
 
         public int OffsetOfX { get; set; }
+
+        public int ActualMonitorWidth { get; set; }
+        public int ActualMonitorHeight { get; set; }
     }
 }
